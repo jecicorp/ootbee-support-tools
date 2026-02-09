@@ -33,7 +33,12 @@ maven-deploy:
   stage: deploy
   script:
     - source ${NEXUS_SECRET_FILE}
-    - mvn $MAVEN_CLI_OPTS deploy
+    - >-
+      mvn $MAVEN_CLI_OPTS deploy
+      -Dcentral-publishing.skip=true
+      -Dmaven.deploy.skip=false
+      -DaltSnapshotDeploymentRepository=pristy-snapshots::https://nexus.jeci.tech/repository/pristy-snapshots/
+      -DaltReleaseDeploymentRepository=pristy-releases::https://nexus.jeci.tech/repository/pristy-releases/
   artifacts:
     paths:
       - "**/target/*.jar"
