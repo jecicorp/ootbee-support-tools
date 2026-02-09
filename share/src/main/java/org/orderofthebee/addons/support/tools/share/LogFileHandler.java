@@ -34,7 +34,7 @@ import java.util.function.Supplier;
 
 import org.alfresco.util.ParameterCheck;
 import org.alfresco.util.TempFileProvider;
-import org.apache.commons.compress.archivers.ArchiveEntry;
+import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
 import org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream;
 import org.orderofthebee.addons.support.tools.share.log.Log4jCompatibilityUtils;
 import org.slf4j.Logger;
@@ -256,7 +256,7 @@ public class LogFileHandler
             {
                 for (final File logFile : files)
                 {
-                    final ArchiveEntry archiveEntry = zipOS.createArchiveEntry(logFile, logFile.getName());
+                    final ZipArchiveEntry archiveEntry = (ZipArchiveEntry) zipOS.createArchiveEntry(logFile, logFile.getName());
                     zipOS.putArchiveEntry(archiveEntry);
 
                     final FileInputStream fis = new FileInputStream(logFile);
