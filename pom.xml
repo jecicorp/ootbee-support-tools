@@ -653,6 +653,36 @@
 
     <profiles>
         <profile>
+            <id>ci</id>
+            <properties>
+                <maven.deploy.skip>false</maven.deploy.skip>
+            </properties>
+            <distributionManagement>
+                <repository>
+                    <id>pristy-releases</id>
+                    <url>https://nexus.jeci.tech/repository/pristy-releases/</url>
+                </repository>
+                <snapshotRepository>
+                    <id>pristy-snapshots</id>
+                    <url>https://nexus.jeci.tech/repository/pristy-snapshots/</url>
+                </snapshotRepository>
+            </distributionManagement>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.sonatype.central</groupId>
+                        <artifactId>central-publishing-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>injected-central-publishing</id>
+                                <phase>none</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
             <id>release</id>
             <build>
                 <plugins>
