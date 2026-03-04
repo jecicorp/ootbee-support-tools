@@ -139,7 +139,7 @@ null
         "${rdName}": {
             "targetMimetype": <#if renditionDefinitions[rdName].targetMimetype??>"${renditionDefinitions[rdName].targetMimetype}"<#else>null</#if>
             <#if renditionDefinitions[rdName].transformOptions??>
-            , "transformOptions": "${renditionDefinitions[rdName].transformOptions}"
+            , "transformOptions": <#assign tOpts = renditionDefinitions[rdName].transformOptions><#if tOpts?is_hash || tOpts?is_enumerable>{<#assign toKeys = tOpts?keys><#list toKeys as toKey>"${toKey}": "${tOpts[toKey]}"<#if toKey_has_next>, </#if></#list>}<#else>"${tOpts}"</#if>
             </#if>
         }<#if rdName_has_next>,</#if>
         </#list>
