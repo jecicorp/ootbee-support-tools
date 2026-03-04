@@ -9,7 +9,7 @@
     <packaging>pom</packaging>
 
     <name>OOTBee Support Tools - Parent</name>
-    <description>Addon to enhance the Repository and Share Admin Console/Tools with new tools and make tools previously exclusive to the Enterprise Edition addon Alfresco Support Tools available in Community Edition</description>
+    <description>Fork maintained by Jeci of OOTBee Support Tools - Addon to enhance the Repository and Share Admin Console/Tools with new tools and make tools previously exclusive to the Enterprise Edition addon Alfresco Support Tools available in Community Edition</description>
     <url>https://github.com/OrderOfTheBee/ootbee-support-tools</url>
 
     <licenses>
