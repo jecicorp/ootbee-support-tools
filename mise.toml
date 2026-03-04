@@ -1,0 +1,18 @@
+[env]
+MAVEN_CLI_OPTS = "--batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
+
+
+[tools]
+java = "temurin-17"
+maven = "3.9.9"
+git-cliff = "latest"
+
+[tasks.build]
+description = "Build project"
+alias = "b"
+run = "mvn clean install"
+
+[tasks.clean]
+description = "Clean build project"
+run = "mvn clean"
+
