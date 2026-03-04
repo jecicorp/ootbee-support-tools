@@ -591,7 +591,6 @@
                     <groupId>org.sonatype.central</groupId>
                     <artifactId>central-publishing-maven-plugin</artifactId>
                     <version>${maven.sonatype.version}</version>
-                    <extensions>true</extensions>
                     <configuration>
                         <deploymentName>central.sonatype.com</deploymentName>
                         <autoPublish>true</autoPublish>
@@ -638,11 +637,6 @@
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
             </plugin>
-
-            <plugin>
-                <groupId>org.sonatype.central</groupId>
-                <artifactId>central-publishing-maven-plugin</artifactId>
-            </plugin>
         </plugins>
     </build>
 
@@ -667,20 +661,6 @@
                     <url>https://nexus.jeci.tech/repository/pristy-snapshots/</url>
                 </snapshotRepository>
             </distributionManagement>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.sonatype.central</groupId>
-                        <artifactId>central-publishing-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>injected-central-publishing</id>
-                                <phase>none</phase>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
         </profile>
         <profile>
             <id>release</id>
