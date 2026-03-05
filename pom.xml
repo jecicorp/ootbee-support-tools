@@ -5,7 +5,7 @@
 
     <groupId>fr.jeci.alfresco</groupId>
     <artifactId>support-tools-parent</artifactId>
-    <version>1.2.3.1</version>
+    <version>1.2.3.2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>OOTBee Support Tools - Parent</name>
