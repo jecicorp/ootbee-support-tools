@@ -5,7 +5,9 @@
     <url>/ootbee/admin/active-sessions/users/{userName}</url>
     <family>AdminConsoleHelper</family>
     <family>OOTBee Support Tools</family>
-    <format default="json" />
+    <!-- Pristy: 'argument' format style so a user name containing dots (e.g. an
+         email-style login) is not truncated at the first dot by extension parsing. -->
+    <format default="json">argument</format>
     <authentication>admin</authentication>
     <lifecycle>internal</lifecycle>
     <!-- no real change in persistence thus a readonly transaction will do -->
