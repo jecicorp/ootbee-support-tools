@@ -63,7 +63,7 @@ function loadSolrSummaryAndStatus()
     propertyGetter = buildPropertyGetter(ctxt);
     indexSubsystem = propertyGetter('index.subsystem.name');
 
-    if (/^solr([46])?$/.test(indexSubsystem))
+    if (/^solr([469])?$/.test(indexSubsystem))
     {
         model.solrSubsystemEnabled = true;
 
@@ -93,7 +93,7 @@ function loadSolrSummaryAndStatus()
         });
         model.coreNames = coreNames;
 
-        if (/^solr([6])?$/.test(indexSubsystem))
+        if (/^solr([69])?$/.test(indexSubsystem))
         {
             solrAdminNativeClient = solrContext
                     .getBean('solrAdminNativeClient', Packages.org.orderofthebee.addons.support.tools.repo.search.SolrAdminNativeClient);

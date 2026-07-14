@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+        solr9 variant of the native Solr admin client. Identical to the solr6 one: it
+        talks to Solr directly (solrHttpClientFactory + ${solr.baseUrl}) for actions that
+        are native to Solr and not part of the Alfresco REST API, e.g. the cascade-tracker
+        pending count. In the Pristy solr9 subsystem the Alfresco admin actions (SUMMARY,
+        REPORT, ...) go to the trackers service, but this native client stays on Solr.
+    -->
+    <bean id="solrAdminNativeClient" class="org.orderofthebee.addons.support.tools.repo.search.solr6.SolrAdminNativeClientImpl">
+        <property name="httpClient">
+            <bean factory-bean="solrHttpClientFactory" factory-method="getHttpClient" />
+        </property>
+        <property name="baseUrl" value="${solr.baseUrl}" />
+    </bean>
+
+</beans>
