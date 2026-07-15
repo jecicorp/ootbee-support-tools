@@ -35,6 +35,11 @@ public class SolrAdminNativeClientImpl implements SolrAdminNativeClient {
                     httpClient.getHostConfiguration().getHostURL() + baseUrl + "/" + coreName + "/select"
                             + "?fl=" + URLEncoder.encode("*,[cached]", StandardCharsets.UTF_8.toString())
                             + "&q=" + URLEncoder.encode("{!term f=int@s_@cascade}1", StandardCharsets.UTF_8.toString())
+                            // defType=lucene is required: the Alfresco core's default query
+                            // parser is afts, which rejects the {!term ...} local-params syntax
+                            // ("no viable alternative at character ' '"). Selecting the lucene
+                            // parser lets Solr honour the local-params term query.
+                            + "&defType=lucene"
                             + "&wt=json");
             httpClient.executeMethod(getMethod);
             JSONObject json = (JSONObject) new JSONParser().parse(getMethod.getResponseBodyAsString());
