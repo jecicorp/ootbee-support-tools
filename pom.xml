@@ -707,6 +707,16 @@
                         </lifecycleMappingMetadata>
                     </configuration>
                 </plugin>
+                <plugin>
+                    <groupId>org.cyclonedx</groupId>
+                    <artifactId>cyclonedx-maven-plugin</artifactId>
+                    <version>2.9.3</version>
+                    <configuration>
+                        <outputFormat>json</outputFormat>
+                        <includeTestScope>false</includeTestScope>
+                        <skipNotDeployed>false</skipNotDeployed>
+                    </configuration>
+                </plugin>
             </plugins>
         </pluginManagement>
         
@@ -731,7 +741,54 @@
             <id>ci</id>
             <properties>
                 <maven.deploy.skip>false</maven.deploy.skip>
+                <sbom.repository.id>${project.distributionManagement.repository.id}</sbom.repository.id>
+                <sbom.repository.url>${project.distributionManagement.repository.url}</sbom.repository.url>
             </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-deploy-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>sbom-runtime</id>
+                                <phase>none</phase>
+                                <goals>
+                                    <goal>deploy-file</goal>
+                                </goals>
+                                <configuration>
+                                    <file>${project.build.directory}/bom-runtime.json</file>
+                                    <classifier>cyclonedx</classifier>
+                                    <groupId>${project.groupId}</groupId>
+                                    <artifactId>${project.artifactId}</artifactId>
+                                    <version>${project.version}</version>
+                                    <packaging>json</packaging>
+                                    <generatePom>false</generatePom>
+                                    <repositoryId>${sbom.repository.id}</repositoryId>
+                                    <url>${sbom.repository.url}</url>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>sbom-full</id>
+                                <phase>none</phase>
+                                <goals>
+                                    <goal>deploy-file</goal>
+                                </goals>
+                                <configuration>
+                                    <file>${project.build.directory}/bom-full.json</file>
+                                    <classifier>cyclonedx-full</classifier>
+                                    <groupId>${project.groupId}</groupId>
+                                    <artifactId>${project.artifactId}</artifactId>
+                                    <version>${project.version}</version>
+                                    <packaging>json</packaging>
+                                    <generatePom>false</generatePom>
+                                    <repositoryId>${sbom.repository.id}</repositoryId>
+                                    <url>${sbom.repository.url}</url>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
             <distributionManagement>
                 <repository>
                     <id>pristy-releases</id>

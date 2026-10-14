@@ -6,6 +6,7 @@ MAVEN_CLI_OPTS = "--batch-mode --errors --fail-at-end --show-version -DinstallAt
 java = "temurin-17"
 maven = "3.9.9"
 git-cliff = "latest"
+trivy = "0.74.0"
 
 [tasks.build]
 description = "Build project"
@@ -16,3 +17,19 @@ run = "mvn clean install"
 description = "Clean build project"
 run = "mvn clean"
 
+[tasks."sbom"]
+description = "Generate CycloneDX SBOMs (runtime = shipped payload, full = incl. provided)"
+run = [
+  "mvn -q org.cyclonedx:cyclonedx-maven-plugin:makeAggregateBom -DoutputFormat=json -DoutputName=bom-runtime -DincludeProvidedScope=false -DincludeTestScope=false",
+  "mvn -q org.cyclonedx:cyclonedx-maven-plugin:makeAggregateBom -DoutputFormat=json -DoutputName=bom-full -DincludeProvidedScope=true -DincludeTestScope=false",
+]
+
+[tasks."audit"]
+description = "Scan shipped dependencies for CVEs (fails on CRITICAL, same gate as CI)"
+depends = ["sbom"]
+run = "trivy sbom --quiet --severity CRITICAL --exit-code 1 target/bom-runtime.json"
+
+[tasks."audit:full"]
+description = "Report CVEs on the whole runtime tree, Alfresco included (never fails)"
+depends = ["sbom"]
+run = "trivy sbom --quiet --severity HIGH,CRITICAL target/bom-full.json"
