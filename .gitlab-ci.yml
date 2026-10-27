@@ -1,6 +1,6 @@
 ---
 include:
-  - component: $CI_SERVER_FQDN/jeci/components/ansible/maven@develop
+  - component: $CI_SERVER_FQDN/jeci/components/ansible/maven@0.6.0
     inputs:
       verify: true
       maven_args: "-Pci"
