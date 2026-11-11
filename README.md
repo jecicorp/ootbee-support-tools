@@ -4,6 +4,20 @@ This addon aims to enhance the scope and functionality available to Alfresco adm
 
 The project started as a project at the [2016 Global Virtual Hack-a-thon](https://community.alfresco.com/docs/DOC-6364-projects-and-teams-global-virtual-hackathon-2016) and has since been transferred to the Order of the Bee in order to make it a fully community-owned and -maintained project. 
 
+# Jeci fork
+
+This repository is a fork of [OrderOfTheBee/ootbee-support-tools](https://github.com/OrderOfTheBee/ootbee-support-tools) maintained by [Jeci](https://jeci.fr). It is based on upstream 1.2.3.1 and released as `1.2.3.2-PY.<n>` with the Maven groupId `fr.jeci.alfresco` (artifacts `support-tools-repo` and `support-tools-share`).
+
+Changes over upstream:
+
+- JSON response templates for the scheduled jobs, transforms and system information webscripts
+- Solr tracking support for the `solr9` search subsystem
+- Active sessions: log-off of a user whose name contains dots
+- `commons-compress` 1.27.1 in the Share module
+- Build with Java 17, GitLab CI with a dependency CVE scanning gate ([docs/DependencyScanning.md](docs/DependencyScanning.md))
+
+Upstream commits are cherry-picked one by one, see [docs/upstream-sync.md](docs/upstream-sync.md).
+
 # Compatibility
 
 This project has been built to be compatible with Alfresco Community 5.0.d+ and Alfresco Enterprise 5.1+.
@@ -14,33 +28,15 @@ Though it can technically be installed in Alfresco Enterprise 5.0 it will not wo
 
 This addon is being build using Alfresco SDK 4. This means we primarily produce a JAR artifact that can be added to an Alfresco installation, though care must be taken to also include all of the third party dependencies required by the OOTBee Support Tools. For users who want a hassle free installation using Alfresco Module Packages (AMPs) we also still produce an AMP for both Repository and Share as we have done in version 1.0.0.0.
 
-## Using SNAPSHOT builds
-
-In order to use a pre-built SNAPSHOT artifact published to the Open Source Sonatype Repository Hosting site, the artifact repository may need to be added to the POM, global settings.xml or an artifact repository proxy server. The following is the XML snippet for inclusion in a POM file.
-
-```xml
-<repositories>
-    <repository>
-        <id>central-snapshots</id>
-        <url>https://central.sonatype.com/repository/maven-snapshots/</url>
-        <snapshots>
-            <enabled>true</enabled>
-        </snapshots>
-    </repository>
-</repositories>
-```
-
-**Note:** Previously, SNAPSHOT builds used to be published to the Open Source Sonatype Repository Hosting (OSSRH) site, which has reached end-of-life on June 30th 2025. Any projects that used to reference OSSRH to obtain a SNAPSHOT of this project need to be updated.
-
 ## Repository-tier
 
 Including the AMP artifact into an All-in-One project created from the archetype provided by Alfresco SDK 4, the following dependency must be added to the ``*-platform-docker`` sub-module of the generated project:
 
 ```xml
 <dependency>
-    <groupId>org.orderofthebee.support-tools</groupId>
+    <groupId>fr.jeci.alfresco</groupId>
     <artifactId>support-tools-repo</artifactId>
-    <version>1.1.0.0</version>
+    <version>1.2.3.2-PY.3</version>
     <type>amp</type>
     <classifier>amp</classifier>
     <exclusions>
@@ -60,9 +56,9 @@ Including the AMP artifact into an All-in-One project created from the archetype
 
 ```xml
 <dependency>
-    <groupId>org.orderofthebee.support-tools</groupId>
+    <groupId>fr.jeci.alfresco</groupId>
     <artifactId>support-tools-share</artifactId>
-    <version>1.1.0.0</version>
+    <version>1.2.3.2-PY.3</version>
     <type>amp</type>
     <classifier>amp</classifier>
     <exclusions>
@@ -74,21 +70,13 @@ Including the AMP artifact into an All-in-One project created from the archetype
 </dependency>
 ```
 
-## Artifact Repository and Building
+## Building
 
-Releases of this addon are [published to Maven Central](https://search.maven.org/search?q=g:org.orderofthebee.support-tools) so you can use these artifacts in your Maven build without any extra configuration. If you want to use a SNAPSHOT build, clone this project and build it locally using:
+Build the project locally using:
 
 ```
 mvn install
 ```
-
-# Contributing
-
-We hope to have lots of collaborators on this project. As such, we have outlined our contribution policies and proceedures in the [CONTRIBUTING.md](./CONTRIBUTING.md) document.
-
-# Code of conduct
-
-It is a key goal of our project to foster active participation and collaboration with the greater Alfresco community. To that end we expect folks to conform to our [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md).
 
 # License
 This addon is licensed under the GNU Lesser General Public License (LGPL) v3 similarily to the original work by Antonio Soler. See [LICENSE.md](./LICENSE.md) for the full LGPL license.
@@ -118,7 +106,7 @@ Original authors:
 - [Markus Joos](https://github.com/mrksjs), AdNovum
 - Florian Maul, fme AG (JavaScript Console)
 
-Maintainers:
+Upstream maintainers:
 
 - [Axel Faust](https://github.com/AFaust), Acosix / Order of the Bee
 - [Bindu Wavell](https://github.com/binduwavell), Zia / Order of the Bee
