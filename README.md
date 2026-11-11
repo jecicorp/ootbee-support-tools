@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/OrderOfTheBee/ootbee-support-tools.svg?branch=master)](https://travis-ci.org/OrderOfTheBee/ootbee-support-tools)
-
 # OOTBee Support Tools
 
 This addon aims to enhance the scope and functionality available to Alfresco administrators via the Repository-tier Admin Console or Share-tier Admin Tools. It contains most of the tools provided with the [Alfresco Support Tools](https://github.com/Alfresco/alfresco-support-tools) addon (by Antonio Soler) without requiring to be run on any specific Alfresco edition as well as about half a dozen custom tools.
