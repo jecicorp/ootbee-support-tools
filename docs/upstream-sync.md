@@ -31,7 +31,7 @@ Maven coordinates and versions differ from upstream (`fr.jeci.alfresco`, `-PY.x`
 ## Never ported
 
 - Release bookkeeping: version-only `pom.xml` commits.
-- Travis and GitHub tooling: the fork builds on GitLab CI.
+- Travis and GitHub tooling, except removals: the fork builds on GitLab CI.
 
 Pristy does not deploy the Share AMP. Share-only commits are skipped unless they also
 touch the repository; Share hunks of a mixed commit are kept to stay close to upstream.
