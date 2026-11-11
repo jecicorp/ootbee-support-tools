@@ -43,5 +43,5 @@ touch the repository; Share hunks of a mixed commit are kept to stay close to up
 | `add14a6` | 2026-07-02 | (#275) Fix Share log tailing          | Ported (`ae77537`)          |
 | `2b4d397` | 2026-07-02 | (#275) Return UUID of appender        | Ported (`2298604`)          |
 | `6655c03` | 2026-07-17 | (#280) Fix for-loop set handling      | Ported (`74a0fab`)          |
-| `d792a81` | 2026-09-18 | (#283) Remove Travis remnant files    | Skipped: never ported       |
+| `d792a81` | 2026-09-18 | (#283) Remove Travis remnant files    | Ported (`af8d577`)          |
 | `a182455` | 2026-09-18 | (#283) Prepare release                | Skipped: never ported       |
